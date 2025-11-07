@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f9; }
+        .header { background-color: #007bff; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+        .report-section { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .log-item { display: flex; padding: 12px 0; border-bottom: 1px dashed #eee; align-items: flex-start; }
+        .log-status { font-weight: bold; padding: 6px 12px; border-radius: 4px; min-width: 120px; text-align: center; margin-right: 20px; font-size: 14px; }
+        .PASS { background-color: #d4edda; color: #155724; }
+        .ERROR { background-color: #f8d7da; color: #721c24; }
+        .FINISH { background-color: #fff3cd; color: #856404; }
+        .FATAL_ERROR { background-color: #dc3545; color: white; }
+        .log-details { flex-grow: 1; }
+        h2 { border-bottom: 2px solid #e9ecef; padding-bottom: 10px; margin-top: 0; }
+        small { color: #6c757d; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI Test Report for: <a href="{{ report.url }}" style="color: #fff;">{{ report.url }}</a></h1>
+        <p>Total Steps Executed: **{{ report.actions | length }}**</p>
+    </div>
+
+    <div class="report-section">
+        <h2>Detailed Execution Log</h2>
+        {% for action in report.actions %}
+        <div class="log-item">
+            <span class="log-status {{ action.status }}">{{ action.status }}</span>
+            <div class="log-details">
+                <strong>Step {{ action.step }}:</strong> {{ action.action }}
+                <br>
+                <small>URL after step: {{ action.url_after }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="report-section">
+        <h2>AI Final Quality Assessment</h2>
+        <p>{{ report.summary if report.summary else "The agent terminated without generating a full summary (due to a FATAL_ERROR or explicit finish)." }}</p>
+    </div>
+
+    <p style="text-align: center;"><a href="{{ url_for('index') }}">Test Another URL</a></p>
+</body>
+</html>
