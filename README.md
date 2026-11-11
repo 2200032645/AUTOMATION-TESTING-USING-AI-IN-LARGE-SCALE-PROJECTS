@@ -95,9 +95,7 @@ The complete research paper associated with this project is available in the rep
 
 **Institution:** Koneru Lakshmaiah Education Foundation, Andhra Pradesh, India.
 
-### Research Paper PDF
 
-[Read the Complete Research Paper](research/Capstone_project_final.pdf)
 
 ## Repository Structure
 
